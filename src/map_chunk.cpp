@@ -2,8 +2,7 @@
 
 namespace rpback {
 
-template <typename Map>
-MapChunk<Map>::MapChunk()
+MapChunk::MapChunk()
 {
 }
 

@@ -13,6 +13,8 @@ else()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support.")
 endif()
 
-aux_source_directory(. SRC_LIST)
-add_executable(${PROJECT_NAME} ${SRC_LIST})
+include_directories(src)
+include_directories(src/3rdparty)
+aux_source_directory(src SRC_LIST)
 
+add_executable(${PROJECT_NAME} ${SRC_LIST})
