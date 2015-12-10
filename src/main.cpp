@@ -20,7 +20,11 @@ public: void processInput() {}
 
 } // namespace rpback
 
+#ifdef RPBACK_NO_MAIN
+int rpback_main()
+#else
 int main()
+#endif
 {
     rpback::Game game;
     rpback::InputProcessor input;

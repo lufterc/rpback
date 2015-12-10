@@ -14,7 +14,15 @@ else()
 endif()
 
 include_directories(src)
-include_directories(src/3rdparty)
+include_directories(3rdparty)
 aux_source_directory(src SRC_LIST)
+aux_source_directory(3rdparty/micropather SRC_LIST)
+aux_source_directory(test SRC_LIST_TEST)
 
+# Main executable
 add_executable(${PROJECT_NAME} ${SRC_LIST})
+
+# Testing executable
+add_executable(${PROJECT_NAME}_test ${SRC_LIST} ${SRC_LIST_TEST})
+set_target_properties(${PROJECT_NAME}_test PROPERTIES
+    COMPILE_DEFINITIONS "RPBACK_NO_MAIN")
