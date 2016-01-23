@@ -1,5 +1,6 @@
 #include <iostream>
 #include <micropather/micropather.h>
+#include "world.h"
 using namespace std;
 
 namespace rpback {
@@ -8,15 +9,15 @@ class Game
 {
 public: void processEvents() {}
 public: void loadResources() {}
+
+private:
+    World world;
 };
 
 class InputProcessor
 {
 public: void processInput() {}
 };
-
-// Useful links:
-// https://www.wpsoftware.net/andrew/pages/libyaml.html
 
 } // namespace rpback
 

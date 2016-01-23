@@ -1,1 +1,5 @@
 *.user
+*.o
+*.a
+*.exe
+build/*

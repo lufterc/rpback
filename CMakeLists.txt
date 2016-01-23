@@ -16,6 +16,7 @@ endif()
 include_directories(src)
 include_directories(3rdparty)
 aux_source_directory(src SRC_LIST)
+#aux_source_directory(3rdparty/lua SRC_LIST)
 aux_source_directory(3rdparty/micropather SRC_LIST)
 aux_source_directory(test SRC_LIST_TEST)
 
