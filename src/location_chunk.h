@@ -2,16 +2,10 @@
 #define RPBACK_MAP_CHUNK_H
 
 #include <list>
+#include "entity.h"
 #include "occupancy_grid.h"
 
 namespace rpback {
-
-class ItemFunction;
-class Entity
-{
-public:
-    virtual void accept(ItemFunction *) {}
-};
 
 class LocationChunk
 {
@@ -21,6 +15,7 @@ public:
 private:
     OccupancyGrid occupancy_grid;
     std::list<std::unique_ptr<Entity>> object_list;
+    // object_index
 };
 
 } // namespace rpback

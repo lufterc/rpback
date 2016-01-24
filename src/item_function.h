@@ -24,6 +24,11 @@ private:
     StringID fun_name = 0;
 };
 
+// class Open
+// class Close
+// class Crack
+// class Jam
+
 } // namespace rpback
 
 #endif // ITEM_FUNCTION_H

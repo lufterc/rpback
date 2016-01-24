@@ -6,9 +6,11 @@
 
 namespace rpback {
 
+class Entity;
 class Location
 {
 public:
+    void addEntitiy(Entity *);
 
 private:
     LocationChunk location_data[10][10];

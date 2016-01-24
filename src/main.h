@@ -16,6 +16,9 @@ typedef uint64_t Time;
 // Location coordinate
 typedef int64_t Coord;
 
+// Entity index
+typedef uint64_t Id;
+
 } // namespace rpback
 
 #endif // MAIN_H

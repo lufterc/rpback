@@ -11,7 +11,7 @@ class World
 {
 public:
     Time time() const { return world_time; }
-    void changeLocation(Location *);
+    void changeLocation(std::unique_ptr<Location>);
 
 private:
     Time world_time = 0;

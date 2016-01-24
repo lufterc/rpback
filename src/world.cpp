@@ -3,9 +3,9 @@
 namespace rpback
 {
 
-void World::changeLocation(Location *new_location)
+void World::changeLocation(std::unique_ptr<Location> new_location)
 {
-    current_location.reset(new_location);
+    current_location = move(new_location);
 }
 
 } // namespace rpback
