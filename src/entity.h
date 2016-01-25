@@ -8,13 +8,12 @@ namespace rpback
 
 class ItemFunction;
 class Controller;
+class Location;
+
 class Entity
 {
 public:
-    Entity(Coord x, Coord y)
-        : position_x(x), position_y(y)
-    {}
-
+    Entity(Location *location, Coord x, Coord y);
     virtual void accept(ItemFunction *) {}
     void teleportTo(Coord x, Coord y);
 
@@ -22,6 +21,7 @@ public:
     Coord y() const { return position_y; }
 
 private:
+    Id chunk_id;
     Coord position_x;
     Coord position_y;
     std::weak_ptr<Controller> controller;
@@ -29,6 +29,9 @@ private:
 
 // class StaticEntity
 // class DynamicEntity
+
+// class Door
+// class Person
 
 } // namespace rpback
 

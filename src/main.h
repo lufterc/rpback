@@ -17,7 +17,7 @@ typedef uint64_t Time;
 typedef int64_t Coord;
 
 // Entity index
-typedef uint64_t Id;
+typedef size_t Id;
 
 } // namespace rpback
 

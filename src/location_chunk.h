@@ -3,6 +3,7 @@
 
 #include <list>
 #include "entity.h"
+#include "index.h"
 #include "occupancy_grid.h"
 
 namespace rpback {
@@ -11,12 +12,22 @@ class LocationChunk
 {
 public:
     LocationChunk();
+    static size_t size() { return CHUNK_SIZE; }
+
+    inline std::weak_ptr<Entity> entity(Id id);
 
 private:
     OccupancyGrid occupancy_grid;
-    std::list<std::unique_ptr<Entity>> object_list;
-    // object_index
+    Index<std::shared_ptr<Entity>> entity_index;
+
+private:
+    static const size_t CHUNK_SIZE = 10;
 };
+
+std::weak_ptr<Entity> LocationChunk::entity(Id id)
+{
+    return entity_index[id];
+}
 
 } // namespace rpback
 

@@ -25,9 +25,6 @@ public:
 
 private:
     template <class V>
-    size_t emplace(V);
-
-    template <class V>
     void reset(Id id, decltype(&V::reset))
     {
         data[id].reset();
@@ -43,31 +40,31 @@ private:
 };
 
 template <class T>
-template <class V>
-size_t Index<T>::emplace(V value)
+size_t Index<T>::push_someplace(T &v)
 {
     if (free())
     {
         size_t result = free_stuff.back();
-        data[result] = value;
+        data[result] = v;
         free_stuff.pop_back();
         return result;
     }
-
-    data.push_back(value);
+    data.push_back(v);
     return data.size() - 1;
-}
-
-template <class T>
-size_t Index<T>::push_someplace(T &v)
-{
-    return emplace(v);
 }
 
 template <class T>
 size_t Index<T>::push_someplace(T &&v)
 {
-    return emplace(std::move(v));
+    if (free())
+    {
+        size_t result = free_stuff.back();
+        data[result] = std::move(v);
+        free_stuff.pop_back();
+        return result;
+    }
+    data.push_back(std::move(v));
+    return data.size() - 1;
 }
 
 template <class T>
