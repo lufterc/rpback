@@ -1,0 +1,12 @@
+# Sample item
+proto = "items/parent_item"
+
+[item]
+weight = 10.5
+functions = [ "weapon", "lockpick" ]
+
+[item.weapon]
+quality = 50
+
+[item.lockpick]
+quality = 70

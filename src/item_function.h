@@ -22,6 +22,7 @@ public:
 
 private:
     StringID fun_name = 0;
+    // LocaleString fun_name;
 };
 
 // class Open

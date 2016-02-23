@@ -1,41 +1,26 @@
 #include <iostream>
-#include <micropather/micropather.h>
-#include "world.h"
+#include "game.h"
+#include "settings.h"
 using namespace std;
+using namespace rpback;
 
-namespace rpback {
-
-class Game
-{
-public: void processEvents() {}
-public: void loadResources() {}
-
-private:
-    World world;
-};
-
-class InputProcessor
-{
-public: void processInput() {}
-};
-
-} // namespace rpback
+#include "micropather/micropather.h"
 
 #ifdef RPBACK_NO_MAIN
-int rpback_main()
+int rpback_main(int argc, char **argv)
 #else
-int main()
+int main(int argc, char **argv)
 #endif
 {
-    rpback::Game game;
-    rpback::InputProcessor input;
+    Settings settings;
+    settings.parse(argc, argv);
 
-    game.loadResources();
+    DataManager dm(settings);
 
+    Game game(dm);
     while (true)
     {
-        game.processEvents();
-        input.processInput();
+        game.processInput();
     }
     return 0;
 }
