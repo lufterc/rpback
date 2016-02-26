@@ -1,23 +1,31 @@
 # Sample map
+#@include maps/tropics_proto
+surface = "########---###--####--####"
+topx = 100
+topy = 100
+bottomx = -100
+bottomy = -100
 
-[meta]
-topx = -100
-topy = -100
-botx = 100
-boty = 100
-
-[grid]
-data = "0xFF"
-
-[[objects]]
-proto = "items/sample_item"
+#@norefid
+[[object]] #@include entities/trees/spruce_tree
 posx = 20
 posy = 15
 
-[[objects.weapon]]
-durability = 30
+#@norefid
+[[object]] #@include entities/trees/spruce_tree
+posx = 23
+posy = 18
 
-[[objects]]
-proto = "items/sample_item"
-posx = 12
-posy = 10
+#@refid 354cf97225c1e662
+[[object]] #@include entities/doors/simple_door
+posx = 25
+posy = 35
+
+[[object.door]]
+diffictulty = 80
+
+[[object.melee_weapon]]
+sharpness = 52
+
+#@norefid
+[[object]]

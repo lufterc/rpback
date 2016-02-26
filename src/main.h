@@ -9,21 +9,30 @@
 namespace rpback
 {
 
-// Localization string ID
-typedef uint64_t StringID;
-
 // World time
-typedef uint64_t Time;
-typedef uint64_t Duration;
+typedef std::uint64_t Duration;
 
 // Location coordinate
-typedef int64_t Coord;
+typedef std::int64_t Coord;
+
+// Physical characteristics
+typedef std::int64_t Property;
+
+// Object shape
+typedef std::uint64_t Shape;
+
+// Ownership semantics
+template <typename T>
+using Owner = std::unique_ptr<T>;
 
 // Basic string
 typedef std::string String;
 
 // Entity index
-typedef size_t Id;
+typedef std::uint64_t Id;
+
+// Flag
+typedef bool Flag;
 
 } // namespace rpback
 

@@ -9,17 +9,21 @@
 namespace rpback
 {
 
+class DataManager;
+
 class World
 {
 public:
     void tick(); // time passes...
 
-    void changeLocation(std::unique_ptr<Location>);
+    void init(DataManager &dm);
+
+    void *content(const char *) { return nullptr; }
 
 public:
-    Time time() const { return world_time; }
+    Duration time() const { return world_time; }
 private:
-    Time world_time = 0;
+    Duration world_time = 0;
 
 public:
     Duration phaseDuration() const { return phase_duration; }
@@ -32,16 +36,25 @@ private:
     Duration phase_overtime = 0;
 
 private:
-    std::unique_ptr<Location> current_location;
+    Owner<Location> current_location;
 
 private:
-    friend class DataManager;
+    friend class SchemaInstance<World>;
     static struct Schema : public SchemaMap<World>
     {
         Schema()
         {
-            add<SchemaDuration>("phase_duration", &World::phase_duration);
-            add<SchemaDuration>("phase_overtime", &World::phase_overtime);
+            persistent<SchemaDuration>("phase_duration", &World::phase_duration);
+            persistent<SchemaDuration>("phase_overtime", &World::phase_overtime);
+            dynamic<SchemaDuration>("world_time", &World::world_time);
+
+            // table("object") -> create new Entity, fill new Entity,
+            // location->add(Entity) - all new keys should go to "new entity",
+            // and on "finish_table" new entity added to location
+
+            // no need for string name - component should have string name
+            // as class member
+            //add<SchemaComponent<WeaponComponent>>(&World::component_list);
         }
     }
     schema;

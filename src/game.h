@@ -21,7 +21,7 @@ public:
     void processInput();
 
 private:
-    std::unique_ptr<World> world;
+    Owner<World> world;
     DataManager &dm;
 };
 

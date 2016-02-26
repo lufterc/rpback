@@ -1,3 +1,2 @@
-[game]
-phase_duration = 30
-phase_overtime = 10
+phase_duration = 300
+phase_overtime = 100

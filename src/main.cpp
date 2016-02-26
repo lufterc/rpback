@@ -22,5 +22,6 @@ int main(int argc, char **argv)
     {
         game.processInput();
     }
+
     return 0;
 }

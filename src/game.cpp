@@ -8,7 +8,7 @@ void Game::newGame()
     world.reset(new World());
 
     // init from toml file
-    dm.fill<World>(world.get(), "world_settings");
+    dm.fill<World>(*world, "world_settings");
 
     // change location to starting location
 }

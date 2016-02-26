@@ -18,8 +18,9 @@ TEST_CASE("Basic world test", "[world]")
     Game game(data_manager);
 
     World world;
-    data_manager.fill(&world, "world_settings");
-    REQUIRE( world.phaseDuration() == 10 );
+    data_manager.fill(world, "world_settings");
+    REQUIRE( world.phaseDuration() == 300 );
+    REQUIRE( world.phaseOvertime() == 100 );
 
 //    World world;
 //    REQUIRE(world.time() == 0);

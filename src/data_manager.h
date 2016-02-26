@@ -1,10 +1,12 @@
-#ifndef DATA_MANAGER_H_
-#define DATA_MANAGER_H_
+#ifndef _DATA_MANAGER_H_
+#define _DATA_MANAGER_H_
 
+#include <fstream>
 #include "main.h"
 #include "settings.h"
 #include "schema_types.h"
-//#include "loltoml/parse.hpp"
+#include "toml_handler.h"
+#include "loltoml/parse.hpp"
 
 namespace rpback
 {
@@ -23,29 +25,29 @@ public:
     {}
 
     template <typename Structure>
-    void fill(Structure *structure, const char *resource_id);
+    inline void fill(Structure& structure, const char *resource_id);
+
+    inline void fillNode(SchemaInterface& schema, const char *resource_id);
 
 private:
     Settings& settings;
 };
 
-template <typename Structure>
-void DataManager::fill(Structure *structure, const char *resource_id)
+void DataManager::fillNode(SchemaInterface& schema, const char *resource_id)
 {
-    // open file via fstream
-    // create handler instance
-    // parse with loltoml
-    //loltoml::parse();
+    std::ifstream file(settings.dataDir() + "/" + resource_id + ".toml");
+    TomlHandler handler(schema, *this);
 
-    auto field = structure->schema.find("phase_duration");
-    if (!field)
-    {
-        return;
-    }
+    loltoml::parse(file, handler);
+}
 
-    field->accept(10, *structure);
+template <typename Structure>
+void DataManager::fill(Structure &structure, const char *resource_id)
+{
+    SchemaInstance<Structure> schema(structure);
+    fillNode(schema, resource_id);
 }
 
 } // namespace rpback
 
-#endif // DATA_MANAGER_H_
+#endif // _DATA_MANAGER_H_

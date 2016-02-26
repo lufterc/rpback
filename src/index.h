@@ -2,7 +2,7 @@
 #define INDEX_H
 
 #include <vector>
-#include <typeinfo>
+#include <memory>
 #include "main.h"
 
 namespace rpback
@@ -103,6 +103,39 @@ size_t Index<T>::reserved() const
 {
     return data.size();
 }
+
+template <typename T>
+class Container : public std::vector<T>
+{
+public:
+    typename Container::const_iterator
+    erase_fast(typename Container::iterator iterator)
+    {
+        if (std::next(iterator) != this->end())
+        {
+            *iterator = std::move(*this->rbegin());
+        }
+
+        this->pop_back();
+        return iterator;
+    }
+
+    void erase_fast(size_t index)
+    {
+        (*this)[index] = std::move(this->back());
+        this->pop_back();
+    }
+};
+
+template <typename T>
+class OwnerContainer : public Container<std::unique_ptr<T>>
+{
+public:
+    void push_back(T* val)
+    {
+        Container<std::unique_ptr<T>>::push_back(std::unique_ptr<T>(val));
+    }
+};
 
 } // namespace rpback
 
