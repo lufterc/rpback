@@ -1,0 +1,49 @@
+# Sample map state
+[[object._354cf97225c1e662.door]]
+state = "open"
+
+[[object._e0330c69d27bf0e3]]
+
+[[object._e0330c69d27bf0e3.position]]
+posx = 50
+posy = 60
+
+[[object._e0330c69d27bf0e3.character]]
+build = 15
+agility = 12
+skillfulness = 16
+intelligence = 12
+charisma = 20
+
+[[object._e0330c69d27bf0e3.character.skill]]
+name = "archery"
+value = 50
+
+[[object._e0330c69d27bf0e3.character.skill]]
+name = "brawling"
+value = 100
+
+[[object._e0330c69d27bf0e3.container.item]]
+_proto = "items/sample_item"
+weight = 105
+condition = 60
+
+
+# struct Dynamic
+# {
+#   Static *link;
+#   int value3;
+#   Schema;
+# }
+#
+# struct Static
+# {
+#   int value1;
+#   int value2;
+#   Schema;
+# }
+#
+# StaticStorage
+# {
+#   map<id, Static> parsed;
+# }

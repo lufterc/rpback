@@ -8,8 +8,6 @@
 namespace rpback
 {
 
-class ItemFunction;
-class Controller;
 class Location;
 
 class Entity;
@@ -63,7 +61,12 @@ public:
     }
 
 private:
+    Coord pos_x;
+    Coord pos_y;
     Property item_weight;
+    String prototype_id; // if prototype_id is empty - this is a custom object,
+    // and 100% created from savegame - so during serialization, all fields are
+    // saved, not only the dynamic ones, but persistent ones too
 
 private:
     Id uuid = 0;
@@ -75,12 +78,15 @@ private:
     {
         Schema()
         {
+            dynamic<SchemaString>("_proto", &Entity::prototype_id);
             component<EntityCharacterComponent>("character", nullptr);
+            component<EntityPersonalityComponent>("personality", nullptr);
         }
     }
     schema;
 };
 
+#if 0
 class Body
 {
 public:
@@ -116,6 +122,7 @@ private:
     // entity components
     Owner<Entity> entity = Owner<Entity>(new Entity()); // entity is given away when player picks item up
 };
+#endif
 
 
 
@@ -144,12 +151,6 @@ public:
         return item->check(this);
     }
 };
-
-// class StaticEntity
-// class DynamicEntity
-
-// class Door
-// class Person
 
 } // namespace rpback
 

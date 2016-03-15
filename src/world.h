@@ -20,6 +20,10 @@ public:
 
     void *content(const char *) { return nullptr; }
 
+    // std::multimap travellers;
+    // travellers are loaded into locationchunks, so location doesn't own them
+    // world does own them
+
 public:
     Duration time() const { return world_time; }
 private:

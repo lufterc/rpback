@@ -31,6 +31,10 @@ typedef std::string String;
 // Entity index
 typedef std::uint64_t Id;
 
+// Entity index
+template <typename T>
+using IndexMap = std::map<Id, T*>;
+
 // Flag
 typedef bool Flag;
 

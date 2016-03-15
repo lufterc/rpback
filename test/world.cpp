@@ -1,10 +1,15 @@
+#include <sstream>
 #include "catch/catch.hpp"
+#include "loltoml/parse.hpp"
+#include "game.h"
 #include "world.h"
 #include "location.h"
+#include "toml_handler.h"
 #include "data_manager.h"
-#include "game.h"
 using namespace std;
 using namespace rpback;
+
+#define EOL "\n"
 
 TEST_CASE("This is a sample test", "[sample]")
 {
@@ -22,22 +27,21 @@ TEST_CASE("Basic world test", "[world]")
     REQUIRE( world.phaseDuration() == 300 );
     REQUIRE( world.phaseOvertime() == 100 );
 
-//    World world;
-//    REQUIRE(world.time() == 0);
+    Location location;
+    string test_level =
+            "max_x = 100"  EOL
+            "max_y = 100"  EOL
+            "min_x = -100" EOL
+            "min_y = -100" EOL
+            ""             EOL
+            "[[object]]"    EOL
+            "pos_x = 15"
+            "pos_y = 20"
+            EOL;
 
-//    world.init(dm);
-
-//    Location area;
-//    area.resize(-100, -100, 100, 100);
-
-//    int a, b, c, d;
-//    serial(a, b, c, d, a, d, c);
-
-//    SerialMap<int> smap = { {
-//        { "value", [](int) { return true; } },
-//        { "value2", [](int) { return false; } }
-//    } };
-
-//    Entity *person = new Entity(area.get(), 10, 10);
-
+    stringstream ss(test_level);
+    SchemaInstance<Location> schema(location);
+    TomlHandler handler(schema, data_manager);
+    loltoml::parse(ss, handler);
+    REQUIRE( location.maxX() == 100 );
 }

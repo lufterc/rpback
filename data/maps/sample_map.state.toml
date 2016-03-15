@@ -1,7 +1,0 @@
-# Sample map state
-#@refid 354cf97225c1e662
-[[object]]
-
-[[objects.door]]
-state = "open"
-#@norefid

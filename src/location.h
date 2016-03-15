@@ -16,7 +16,7 @@ public:
     void add(Entity *);
     Entity* entity(Id uuid);
 
-    void resize(Coord tx, Coord ty, Coord bx, Coord by);
+    void resize(Coord minx, Coord miny, Coord maxx, Coord maxy);
 
     // state: staying, sitting, laying
 
@@ -33,34 +33,62 @@ public:
     // child *getChild(uuid), if uuid == 0 -> new child
     // map location_index
 
+public:
+    Coord minX() const { return min_x; }
+    Coord minY() const { return min_y; }
+    Coord maxX() const { return max_x; }
+    Coord maxY() const { return max_y; }
+
 private:
-    Coord top_x = 0;
-    Coord top_y = 0;
-    Coord bottom_x = 0;
-    Coord bottom_y = 0;
+    Coord min_x = 0;
+    Coord min_y = 0;
+    Coord max_x = 0;
+    Coord max_y = 0;
+
+    // switch to location: current_location->serialize(); current_location = goto_location
+    // cutscene: save current location name to var; change location, play scene,
+    // change locatoin back
+
+//    String prototype_id;
+
     // Array[] surface = "fdsfadsfaf";
 
     //    Flag persistent = true;
 
     // mechanisms: it's not loaded during init, but only after that
     OwnerContainer<Entity> location_data;
+    IndexMap<Entity> index_map;
+
+//    World &world;
 
 private:
+    friend class SchemaInstance<Location>;
     Owner<SchemaInterface> component(const std::string &id)
     {
-        location_data.push_back(new Entity());
-        return Owner<SchemaInterface>(new SchemaInstance<Entity>(*location_data.back()));
+        // check index, in case there is already object with id
+        Id new_id = std::stoull(id, nullptr, 16); // catch exception!
+        auto result = index_map.find(new_id);
+        if (result == index_map.end())
+        {
+            location_data.push_back(new Entity());
+            index_map[new_id] = location_data.back().get();
+            return Owner<SchemaInterface>
+                    (new SchemaInstance<Entity>(*location_data.back()));
+        }
+
+        return Owner<SchemaInterface>
+                (new SchemaInstance<Entity>(*result->second));
     }
 
-    friend class SchemaInstance<Location>;
     static struct Schema : public SchemaMap<Location>
     {
         Schema()
         {
-            persistent<SchemaCoord>("top_x", &Location::top_x);
-            persistent<SchemaCoord>("top_y", &Location::top_y);
-            persistent<SchemaCoord>("bottom_x", &Location::bottom_x);
-            persistent<SchemaCoord>("bottom_y", &Location::bottom_y);
+//            dynamic<SchemaString>("_proto", &Location::prototype_id);
+            persistent<SchemaCoord>("min_x", &Location::min_x);
+            persistent<SchemaCoord>("min_y", &Location::min_y);
+            persistent<SchemaCoord>("max_x", &Location::max_x);
+            persistent<SchemaCoord>("max_y", &Location::max_y);
             component<Entity>("object", &Location::component);
         }
     }

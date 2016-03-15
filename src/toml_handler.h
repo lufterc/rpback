@@ -94,7 +94,7 @@ public:
     {
         for (auto i = begin; i != end; ++i)
         {
-            component_schema = std::move(component_schema->component(*i, current_refid));
+            component_schema = std::move(interface().component(*i, current_refid));
             if (!component_schema)
             {
                 ++parser_errors;
@@ -112,6 +112,10 @@ public:
     void start_inline_table()
     {
         // not supported
+        if (true or false)
+        {
+
+        }
     }
 
     void finish_inline_table(std::size_t table_size)

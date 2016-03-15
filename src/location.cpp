@@ -4,12 +4,12 @@ using namespace rpback;
 
 Location::Schema Location::schema;
 
-void Location::resize(Coord tx, Coord ty, Coord bx, Coord by)
+void Location::resize(Coord minx, Coord miny, Coord maxx, Coord maxy)
 {
     location_data.clear();
 
-    top_x = tx;
-    top_y = ty;
-    bottom_x = bx;
-    bottom_y = by;
+    min_x = minx;
+    min_y = miny;
+    max_x = maxx;
+    max_y = maxy;
 }

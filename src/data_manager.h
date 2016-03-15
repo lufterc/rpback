@@ -29,6 +29,11 @@ public:
 
     inline void fillNode(SchemaInterface& schema, const char *resource_id);
 
+    template <typename Structure>
+    void save(Structure& structure, std::string& output)
+    {
+    }
+
 private:
     Settings& settings;
 };
