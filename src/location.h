@@ -26,12 +26,16 @@ public:
     // add("injury")
     //
 
-    // dm.staticFill(location, "maps/location_map");
-    // if (!visited) dm.stateFill(location, "maps/location_map.state");
-    // else dm.savedFill(location, "maps/location_map.state");
+#if 0
+    dm.staticFill(location, "maps/location_map");
+    if (!visited) dm.stateFill(location, "maps/location_map.state");
+    else dm.savedFill(location, "maps/location_map.state");
+#endif
 
-    // child *getChild(uuid), if uuid == 0 -> new child
-    // map location_index
+#if 0
+    child *getChild(uuid), if uuid == 0 -> new child
+    map location_index
+#endif
 
 public:
     Coord minX() const { return min_x; }
@@ -49,17 +53,19 @@ private:
     // cutscene: save current location name to var; change location, play scene,
     // change locatoin back
 
-//    String prototype_id;
-
-    // Array[] surface = "fdsfadsfaf";
-
-    //    Flag persistent = true;
+#if 0
+    String prototype_id;
+    Array[] surface = "......";
+    Flag persistent = true;
+#endif
 
     // mechanisms: it's not loaded during init, but only after that
     OwnerContainer<Entity> location_data;
     IndexMap<Entity> index_map;
 
-//    World &world;
+#if 0
+    World &world;
+#endif
 
 private:
     friend class SchemaInstance<Location>;
@@ -84,7 +90,9 @@ private:
     {
         Schema()
         {
-//            dynamic<SchemaString>("_proto", &Location::prototype_id);
+#if 0
+            dynamic<SchemaString>("_proto", &Location::prototype_id);
+#endif
             persistent<SchemaCoord>("min_x", &Location::min_x);
             persistent<SchemaCoord>("min_y", &Location::min_y);
             persistent<SchemaCoord>("max_x", &Location::max_x);

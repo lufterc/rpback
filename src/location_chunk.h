@@ -14,20 +14,27 @@ public:
     LocationChunk();
     static size_t size() { return CHUNK_SIZE; }
 
-//    inline std::weak_ptr<Body> entity(Id id);
+#if 0
+    inline std::weak_ptr<Body> entity(Id id);
+#endif
 
 private:
     OccupancyGrid occupancy_grid;
-//    Index<std::shared_ptr<Body>> entity_index;
+
+#if 0
+    Index<std::shared_ptr<Body>> entity_index;
+#endif
 
 private:
     static const size_t CHUNK_SIZE = 10;
 };
 
-//std::weak_ptr<Body> LocationChunk::entity(Id id)
-//{
-//    return entity_index[id];
-//}
+#if 0
+    std::weak_ptr<Body> LocationChunk::entity(Id id)
+    {
+        return entity_index[id];
+    }
+#endif
 
 } // namespace rpback
 
